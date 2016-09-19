@@ -2,3 +2,7 @@
 *.pickle
 *.h5
 venv/
+models/
+models
+*.pyc
+
