@@ -1,0 +1,4 @@
+*.ann
+*.pickle
+*.h5
+venv/
