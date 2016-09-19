@@ -6,12 +6,15 @@ from json import dumps
 import json
 import requests
 from flask import Response
+import Search
+import pandas
+
 
 
 
 app = Flask(__name__)
 api = Api(app)
-
+s = Search.Search();
 
 class GetSimilarItem_byId(Resource):
     def get(self):
@@ -23,10 +26,12 @@ class GetSimilarItem_byId(Resource):
         id = args['id']
         query = args['query']
         print(args)
-        
+        res = s.get_nns_by_id(id,10)
+        df = pandas.DataFrame(index = res[0], data = res[1])
+        print(df)
         from flask import Response
         #resp = Response(response=dfSuggest[1:int(count)].reset_index().to_json(orient='records'), status=200, mimetype="application/json")
-        
+        resp = Response(response=df.reset_index().to_json(orient='values'), status=200, mimetype="application/json");
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp        
 
