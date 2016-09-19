@@ -1,6 +1,7 @@
 # Massimiliano Ruocco (ruocco@idi.ntnu.no)
 #
-# Class providing functionality for indexing/searching dense representation of text (high dimensional features). Core functionality are based on the annoy ANN search developed here https://github.com/spotify/annoy
+# Class providing functionality for indexing/searching dense representation of text (high dimensional features). 
+# Core functionality are based on the annoy ANN search developed here https://github.com/spotify/annoy
 
 from pandas import HDFStore,DataFrame
 from annoy import AnnoyIndex
