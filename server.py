@@ -9,16 +9,12 @@ from flask import Response
 import Search
 import pandas
 
-
-
-
 app = Flask(__name__)
 api = Api(app)
 s = Search.Search();
 
 class GetSimilarItem_byId(Resource):
     def get(self):
-        print("hete")
         parser = reqparse.RequestParser()
         parser.add_argument('id', type=str)
         parser.add_argument('query', type=str)
@@ -30,7 +26,6 @@ class GetSimilarItem_byId(Resource):
         df = pandas.DataFrame(index = res[0], data = res[1])
         print(df)
         from flask import Response
-        #resp = Response(response=dfSuggest[1:int(count)].reset_index().to_json(orient='records'), status=200, mimetype="application/json")
         resp = Response(response=df.reset_index().to_json(orient='values'), status=200, mimetype="application/json");
         resp.headers['Access-Control-Allow-Origin'] = '*'
         return resp        
@@ -38,5 +33,6 @@ class GetSimilarItem_byId(Resource):
 api.add_resource(GetSimilarItem_byId, '/semsearch/get', endpoint = 'get')
 
 if __name__ == '__main__':
-    app.run()
+    #app.run()
+    app.run(host='0.0.0.0')
 
