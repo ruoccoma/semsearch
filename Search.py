@@ -11,7 +11,7 @@ class Search(object):
 	# Attributes
 	DATA_NAME_H5 = 'data'
 	COLUMN_NAME_H5 = 'feats'
-	FEAT_DIM = 300
+	FEAT_DIM = 2048
 	N_TREES = 10
 	DICT_INT2STR = "dict.pickle"
 	DICT_STR2INT = "dict_inv.pickle"
@@ -36,12 +36,12 @@ class Search(object):
 			for i in range(0,l):
 				val = val_list[i].tolist()
 				ind = ind_list[i]
-				index.add_item(i, val)
+				self.index.add_item(i, val)
 				print(i)
 				self.index_dict_int2str[i] = ind
 				self.index_dict_str2int[ind] = i
-			index.build(self.N_TREES)
-			index.save(self.INDEX_FILE)
+			self.index.build(self.N_TREES)
+			self.index.save(self.INDEX_FILE)
 			pickle.dump(self.index_dict_int2str, open( self.DICT_INT2STR, "wb" ))
 			pickle.dump(self.index_dict_str2int, open( self.DICT_STR2INT, "wb" ))
 			hdf.close()
@@ -55,7 +55,7 @@ class Search(object):
 		return res
 
 	def get_nns_by_vec(self, v, topk):
-		ret = self.index.get_nns_by_vector(v, topk, include_distances=True)
+		res = self.index.get_nns_by_vector(v, topk, include_distances=True)
 		l = len(res[0])
 		for i in range(0,l):
 			res[0][i] = self.index_dict_int2str.get(res[0][i])
