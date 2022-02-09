@@ -82,7 +82,7 @@ ssh-import-id==3.21
 stop-words==2015.2.23.1
 system-service==0.1.6
 tables==3.2.2
-tensorflow==0.9.0
+tensorflow==2.5.3
 Theano==0.8.2
 tornado==4.3
 traitlets==4.0.0
